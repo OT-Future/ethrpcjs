@@ -2,7 +2,7 @@
   "name": "ethrpcjs",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./src/ethrpcjs.js",
   "scripts": {
     "testwatch": "mocha tests/**/*.test.js --watch",
     "test": "mocha tests/**/*.test.js"
