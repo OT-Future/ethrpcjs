@@ -1,15 +1,36 @@
 {
-  "name": "node-rp-rpc",
+  "name": "ethrpcjs",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha tests/**/*.test.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Phisit Kannasut",
+  "license": "GNU",
+  "dependencies": {},
   "devDependencies": {
     "chai": "^4.1.2",
     "mocha": "^4.0.0"
-  }
+  },
+  "directories": {
+    "src": "src",
+    "dist": "dist",
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OT-Future/ethrpcjs.git"
+  },
+  "keywords": [
+    "ethereum",
+    "jsonrpc",
+    "json",
+    "rpc",
+    "rpcapi"
+  ],
+  "bugs": {
+    "url": "https://github.com/OT-Future/ethrpcjs/issues"
+  },
+  "homepage": "https://github.com/OT-Future/ethrpcjs#readme"
 }
