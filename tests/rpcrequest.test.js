@@ -3,7 +3,7 @@ const checkRPIntranet = require('./checkRPIntranet');
 const RPCREQUEST = require('./../src/rpcrequest')
 
 describe('RPC REQUEST MODULE', function () {
-  describe('construction', function () {
+  describe('#construction', function () {
 
     it('should return function when typeof RPCREQUEST', function () {
       assert.equal(typeof RPCREQUEST, "function");
