@@ -11,7 +11,7 @@ var RPCREQUEST = function (rpcaddr, rpcport, requestid) {
 module.exports = RPCREQUEST;
 
 RPCREQUEST.prototype.request = function (method, params, param_options) {
-  if (!params || typeof params['push'] !== 'undefined') params = [params];
+  if (!params || typeof params !== 'object') params = [params];
 
   var data = {
     jsonrpc: "2.0",
@@ -19,6 +19,7 @@ RPCREQUEST.prototype.request = function (method, params, param_options) {
     method: method,
     params: params
   }
+  console.log('ETHRPCJS.request.data', data);
   var postData = JSON.stringify(data);
 
   var options = {
