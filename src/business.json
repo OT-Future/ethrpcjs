@@ -1,0 +1,138 @@
+{
+  "address": "0x0D095bA40484fa45830103Cf1e93C3bA720677f8",
+  "interface": [
+    {
+      "constant": false,
+      "inputs": [
+        { "name": "businessName", "type": "string" },
+        { "name": "businessDescription", "type": "string" },
+        { "name": "passphase", "type": "string" },
+        { "name": "businessContractAddress", "type": "address" },
+        { "name": "interfaceABI", "type": "string" }
+      ],
+      "name": "createBusiness",
+      "outputs": [{ "name": "businessPosition", "type": "uint256" }],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        { "name": "", "type": "address" },
+        { "name": "", "type": "uint256" },
+        { "name": "", "type": "address" }
+      ],
+      "name": "BusinessApprove",
+      "outputs": [{ "name": "", "type": "bool", "value": false }],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "totalBusiness",
+      "outputs": [{ "name": "", "type": "uint256", "value": "0" }],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        { "name": "", "type": "address" },
+        { "name": "", "type": "uint256" }
+      ],
+      "name": "OwnedBusiness",
+      "outputs": [
+        { "name": "businessName", "type": "string" },
+        { "name": "businessDescription", "type": "string" },
+        { "name": "passphase", "type": "string" },
+        { "name": "businessContractAddress", "type": "address" },
+        { "name": "interfaceABI", "type": "string" }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address",
+          "value": "0x8119298427634f57882c20cf4b8c3c1f28432cc4"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        { "name": "businessPosition", "type": "uint256" },
+        { "name": "to", "type": "address" },
+        { "name": "canApprove", "type": "bool" }
+      ],
+      "name": "setApprove",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        { "name": "owner", "type": "address" },
+        { "name": "businessPosition", "type": "uint256" }
+      ],
+      "name": "getBusinessContract",
+      "outputs": [
+        { "name": "businessContractAddress", "type": "address" },
+        { "name": "interfaceABI", "type": "string" }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [{ "name": "", "type": "address" }],
+      "name": "OwnedTotalBusiness",
+      "outputs": [{ "name": "", "type": "uint256", "value": "0" }],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [{ "name": "newOwner", "type": "address" }],
+      "name": "transferOwnership",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        { "indexed": false, "name": "totalBusinessNumber", "type": "uint256" },
+        { "indexed": false, "name": "businessPosition", "type": "uint256" },
+        { "indexed": false, "name": "businessName", "type": "string" },
+        { "indexed": false, "name": "businessDescription", "type": "string" }
+      ],
+      "name": "CreateBusiness",
+      "type": "event"
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 'use strict';
 const RPCREQUEST = require('./rpcrequest');
 const WEB3 = require('./ethweb3');
+const BUSINESS = require('./web3business');
 
 var ETHRPCJS = function(rpcaddr, rpcport) {
   this.rpcaddr = rpcaddr || 'localhost';
@@ -8,6 +9,7 @@ var ETHRPCJS = function(rpcaddr, rpcport) {
   this.rpcrequest = new RPCREQUEST(this.rpcaddr, this.rpcport, 1);
   this._web3 = new WEB3(this.rpcaddr, this.rpcport);
   this._web3.module = this._web3.getModule();
+  this.web3business = new BUSINESS(this._web3.getModule());
 
   return this;
 };
