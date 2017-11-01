@@ -48,6 +48,7 @@ RPCREQUEST.prototype.request = function (method, params, param_options) {
 
     req.on('error', (e) => {
       console.error(`problem with request: ${e.message}`);
+      return reject(e);
     });
 
     req.write(postData);

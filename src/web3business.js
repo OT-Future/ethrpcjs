@@ -16,7 +16,6 @@ BUSINESS.prototype.getBusinessContract = function(businessToken){
       address : '',
       abiInterface : ''
     }
-
     
     return resolve(businessContract);
   })
