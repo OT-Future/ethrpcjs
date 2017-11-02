@@ -1,9 +1,10 @@
 const http = require('http');
 const querystring = require('querystring');
 
-var RPCREQUEST = function (rpcaddr, rpcport, requestid) {
-  this.rpcaddr = rpcaddr || 'localhost';
-  this.rpcport = rpcport || 8545
+var RPCREQUEST = function (parent, requestid) {
+  this.parent = parent;
+  this.rpcaddr = parent.rpcaddr || 'localhost';
+  this.rpcport = parent.rpcport || 8545
   this.requestid = requestid || 0;
 
   return this;
