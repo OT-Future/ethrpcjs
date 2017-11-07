@@ -1,15 +1,18 @@
 const http = require('http');
+const querystring = require('querystring');
 
-var RPCREQUEST = function (rpcaddr, rpcport, requestid) {
-  this.rpcaddr = rpcaddr || 'localhost';
-  this.rpcport = rpcport || 8545
+var RPCREQUEST = function (parent, requestid) {
+  this.parent = parent;
+  this.rpcaddr = parent.rpcaddr || 'localhost';
+  this.rpcport = parent.rpcport || 8545
   this.requestid = requestid || 0;
 
   return this;
 }
+module.exports = RPCREQUEST;
 
 RPCREQUEST.prototype.request = function (method, params, param_options) {
-  if (typeof params['push'] !== 'undefined') params = [params];
+  if (!params || typeof params !== 'object') params = [params];
 
   var data = {
     jsonrpc: "2.0",
@@ -17,7 +20,8 @@ RPCREQUEST.prototype.request = function (method, params, param_options) {
     method: method,
     params: params
   }
-  var postData = querystring.stringify(data);
+  console.log('ETHRPCJS.request.data', data);
+  var postData = JSON.stringify(data);
 
   var options = {
     hostname: this.rpcaddr,
@@ -30,27 +34,24 @@ RPCREQUEST.prototype.request = function (method, params, param_options) {
     }
   }
 
-  return new Promise(function (resolve, reject) {
-    http.request(options, (res) => {
-      console.log(`STATUS: ${res.statusCode}`);
-      console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
+  return new Promise(function (resolve, reject) {    
+    var req = http.request(options, (res) => {
       var res_chunk = '';
       res.setEncoding('utf8');
       res.on('data', (chunk) => {
-        console.log(`BODY: ${chunk}`);
         res_chunk += chunk;
       });
       res.on('end', () => {
-        console.log('No more data in response.');
-        return resolve(res_chunk);
+        res.data = JSON.parse(res_chunk);
+        return resolve(res);
       });
     });
 
     req.on('error', (e) => {
       console.error(`problem with request: ${e.message}`);
+      return reject(e);
     });
 
-    // write data to request body
     req.write(postData);
     req.end();
   })

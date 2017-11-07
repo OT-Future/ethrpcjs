@@ -1,15 +1,34 @@
 {
-  "name": "node-rp-rpc",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "ethrpcjs",
+  "version": "0.0.2",
+  "description": "ethrpcjs is connector module for Ethereum RPC",
+  "main": "./src/ethrpcjs.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "testwatch": "mocha tests/**/*.test.js --watch",
+    "test": "mocha tests/**/*.test.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Phisit Kannasut",
+  "license": "GNU",
+  "dependencies": {
+    "web3": "^1.0.0-beta.24"
+  },
   "devDependencies": {
     "chai": "^4.1.2",
     "mocha": "^4.0.0"
-  }
+  },
+  "directories": {
+    "src": "src",
+    "dist": "dist",
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OT-Future/ethrpcjs.git"
+  },
+  "keywords": ["ethereum", "jsonrpc", "json", "rpc", "rpcapi"],
+  "bugs": {
+    "url": "https://github.com/OT-Future/ethrpcjs/issues"
+  },
+  "homepage": "https://github.com/OT-Future/ethrpcjs#readme",
+  "private": true
 }
