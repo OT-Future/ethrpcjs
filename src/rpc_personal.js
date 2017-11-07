@@ -9,8 +9,8 @@ PERSONAL.prototype.listAccounts = function() {
   return this.parent.rpcrequest.request('personal_listAccounts');
 };
 
-PERSONAL.prototype.newAccount = function() {
-  return this.parent.rpcrequest.request('personal_newAccount');
+PERSONAL.prototype.newAccount = function(params, params_option) {
+  return this.parent.rpcrequest.request('personal_newAccount', params, params_option);
 };
 
 module.exports = PERSONAL;

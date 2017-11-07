@@ -2,7 +2,11 @@
 const RPCREQUEST = require('./rpcrequest');
 const WEB3 = require('./ethweb3');
 const BUSINESS = require('./web3business');
+
 const PERSONAL = require('./rpc_personal');
+const ETH = require('./rpc_eth');
+const ADMIN = require('./rpc_admin');
+const RPCMODULE = require('./rpc_module');
 
 var ETHRPCJS = function(rpcprotocol, rpcaddr, rpcport) {
   this.rpcprotocol = rpcprotocol || 'http';
@@ -14,29 +18,11 @@ var ETHRPCJS = function(rpcprotocol, rpcaddr, rpcport) {
   this.web3business = new BUSINESS(this);
 
   this.personal = new PERSONAL(this);
+  this.eth = new ETH(this);
+  this.admin = new ADMIN(this);
+  this.rpcmodule = new RPCMODULE(this);
 
   return this;
-};
-
-ETHRPCJS.prototype.eth = {
-  getBalance: function(rpcrequest, params) {
-    console.log('getBalance.params', params);
-    return rpcrequest.request('eth_getBalance', params);
-  }
-};
-
-ETHRPCJS.prototype.rpc = {
-  modules: function(rpcrequest) {
-    return rpcrequest.request('rpc_modules');
-  },
-  getModule: function() {
-    return this._web3.getModule();
-  }
-};
-ETHRPCJS.prototype.admin = {
-  nodeInfo: function(rpcrequest) {
-    return rpcrequest.request('admin_nodeInfo');
-  }
 };
 
 module.exports = ETHRPCJS;
