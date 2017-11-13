@@ -1,8 +1,6 @@
-'use strict';
-
 
 var BUSINESS = function(parent) {
-  var businessFactory = require('./interfaceABI/Business.json');
+  this.businessFactory = require('./interfaceABI/Business.json');
   this._parent = parent;
   this.web3 = this._parent.web3.getModule();
   this.abiTemplate = {
@@ -11,8 +9,8 @@ var BUSINESS = function(parent) {
   };
 
   this.contractInterface = new this.web3.eth.Contract(
-    businessFactory.interface,
-    businessFactory.address
+    this.businessFactory.interface,
+    this.businessFactory.address
   );
 
   return this;
@@ -34,9 +32,11 @@ BUSINESS.prototype.getBusinessContract = function(
       .OwnedBusiness(businessToken, businessPosition)
       .call()
       .then(function(data) {
-        var abiType = data[4].replace('.json', '');
-        data.abi = _this.abiTemplate[abiType];
-        var buzContract = new _this.web3.eth.Contract(data.abi, data[3]);
+        console.log('BUSINESS.prototype.getBusinessContract data', data);
+        var BuzAddress = data['businessContractAddress'] || '';
+        var abiType = data['interfaceABI'].replace('.json', '') || 'ReadyERC20ADV';
+        var abi = _this.abiTemplate[abiType];
+        var buzContract = new _this.web3.eth.Contract(abi, BuzAddress);
         //console.log('BUSINESS.prototype.getBusinessContract data', buzContract);
         return resolve(buzContract);
       })
