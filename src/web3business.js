@@ -1,14 +1,13 @@
 'use strict';
-const businessFactory = require('./business.json');
-var abi = {
-  ReadyERC20: require('./ReadyERC20.json')
-};
+
 
 var BUSINESS = function(parent) {
+  var businessFactory = require('./interfaceABI/Business.json');
   this._parent = parent;
   this.web3 = this._parent.web3.getModule();
   this.abiTemplate = {
-    ReadyERC20: require('./ReadyERC20.json')
+    ReadyERC20: require('./interfaceABI/ReadyERC20.json'),
+    ReadyERC20ADV: require('./interfaceABI/ReadyERC20ADV.json')
   };
 
   this.contractInterface = new this.web3.eth.Contract(
