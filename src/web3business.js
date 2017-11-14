@@ -6,6 +6,7 @@ var BUSINESS = function(parent) {
   this.abiTemplate = {
     ReadyERC20: require('./interfaceABI/ReadyERC20.json'),
     ReadyERC20ADV: require('./interfaceABI/ReadyERC20ADV.json')
+    ReadyERC21ADV: require('./interfaceABI/ReadyERC21ADV.json')
   };
 
   this.contractInterface = new this.web3.eth.Contract(
@@ -34,7 +35,7 @@ BUSINESS.prototype.getBusinessContract = function(
       .then(function(data) {
         console.log('BUSINESS.prototype.getBusinessContract data', data);
         var BuzAddress = data['businessContractAddress'] || '';
-        var abiType = data['interfaceABI'].replace('.json', '') || 'ReadyERC20ADV';
+        var abiType = data['interfaceABI'].replace('.json', '') || 'ReadyERC21ADV';
         var abi = _this.abiTemplate[abiType];
         var buzContract = new _this.web3.eth.Contract(abi, BuzAddress);
         //console.log('BUSINESS.prototype.getBusinessContract data', buzContract);
