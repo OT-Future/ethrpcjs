@@ -1,39 +1,11 @@
 {
-  "address": "0x0D095bA40484fa45830103Cf1e93C3bA720677f8",
+  "address": "0xEe7b00605DE09beF70c467E4dacD02A50Db84A57",
   "interface": [
-    {
-      "constant": false,
-      "inputs": [
-        { "name": "businessName", "type": "string" },
-        { "name": "businessDescription", "type": "string" },
-        { "name": "passphase", "type": "string" },
-        { "name": "businessContractAddress", "type": "address" },
-        { "name": "interfaceABI", "type": "string" }
-      ],
-      "name": "createBusiness",
-      "outputs": [{ "name": "businessPosition", "type": "uint256" }],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [
-        { "name": "", "type": "address" },
-        { "name": "", "type": "uint256" },
-        { "name": "", "type": "address" }
-      ],
-      "name": "BusinessApprove",
-      "outputs": [{ "name": "", "type": "bool", "value": false }],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    },
     {
       "constant": true,
       "inputs": [],
       "name": "totalBusiness",
-      "outputs": [{ "name": "", "type": "uint256", "value": "0" }],
+      "outputs": [{ "name": "", "type": "uint256", "value": "1" }],
       "payable": false,
       "stateMutability": "view",
       "type": "function"
@@ -48,12 +20,37 @@
       "outputs": [
         { "name": "businessName", "type": "string" },
         { "name": "businessDescription", "type": "string" },
-        { "name": "passphase", "type": "string" },
         { "name": "businessContractAddress", "type": "address" },
-        { "name": "interfaceABI", "type": "string" }
+        { "name": "interfaceABI", "type": "string" },
+        { "name": "rewardUrl", "type": "string" }
       ],
       "payable": false,
       "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        { "name": "businessPosition", "type": "uint256" },
+        { "name": "businessContractAddress", "type": "address" },
+        { "name": "interfaceABI", "type": "string" }
+      ],
+      "name": "setSmartContract",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        { "name": "businessPosition", "type": "uint256" },
+        { "name": "rewardUrl", "type": "string" }
+      ],
+      "name": "setRewardUrl",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
       "type": "function"
     },
     {
@@ -74,12 +71,13 @@
     {
       "constant": false,
       "inputs": [
-        { "name": "businessPosition", "type": "uint256" },
-        { "name": "to", "type": "address" },
-        { "name": "canApprove", "type": "bool" }
+        { "name": "businessName", "type": "string" },
+        { "name": "businessDescription", "type": "string" },
+        { "name": "businessContractAddress", "type": "address" },
+        { "name": "interfaceABI", "type": "string" }
       ],
-      "name": "setApprove",
-      "outputs": [],
+      "name": "createBusiness",
+      "outputs": [{ "name": "businessPosition", "type": "uint256" }],
       "payable": false,
       "stateMutability": "nonpayable",
       "type": "function"
@@ -87,14 +85,12 @@
     {
       "constant": false,
       "inputs": [
-        { "name": "owner", "type": "address" },
-        { "name": "businessPosition", "type": "uint256" }
+        { "name": "businessPosition", "type": "uint256" },
+        { "name": "businessName", "type": "string" },
+        { "name": "businessDescription", "type": "string" }
       ],
-      "name": "getBusinessContract",
-      "outputs": [
-        { "name": "businessContractAddress", "type": "address" },
-        { "name": "interfaceABI", "type": "string" }
-      ],
+      "name": "setBusinessInfo",
+      "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
       "type": "function"

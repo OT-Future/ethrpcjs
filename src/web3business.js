@@ -1,19 +1,17 @@
-'use strict';
-const businessFactory = require('./business.json');
-var abi = {
-  ReadyERC20: require('./ReadyERC20.json')
-};
 
 var BUSINESS = function(parent) {
+  this.businessFactory = require('./interfaceABI/Business.json');
   this._parent = parent;
   this.web3 = this._parent.web3.getModule();
   this.abiTemplate = {
-    ReadyERC20: require('./ReadyERC20.json')
+    ReadyERC20: require('./interfaceABI/ReadyERC20.json'),
+    ReadyERC20ADV: require('./interfaceABI/ReadyERC20ADV.json'),
+    ReadyERC21ADV: require('./interfaceABI/ReadyERC21ADV.json')
   };
 
   this.contractInterface = new this.web3.eth.Contract(
-    businessFactory.interface,
-    businessFactory.address
+    this.businessFactory.interface,
+    this.businessFactory.address
   );
 
   return this;
@@ -35,9 +33,11 @@ BUSINESS.prototype.getBusinessContract = function(
       .OwnedBusiness(businessToken, businessPosition)
       .call()
       .then(function(data) {
-        var abiType = data[4].replace('.json', '');
-        data.abi = _this.abiTemplate[abiType];
-        var buzContract = new _this.web3.eth.Contract(data.abi, data[3]);
+        console.log('BUSINESS.prototype.getBusinessContract data', data);
+        var BuzAddress = data['businessContractAddress'] || '';
+        var abiType = data['interfaceABI'].replace('.json', '') || 'ReadyERC21ADV';
+        var abi = _this.abiTemplate[abiType];
+        var buzContract = new _this.web3.eth.Contract(abi, BuzAddress);
         //console.log('BUSINESS.prototype.getBusinessContract data', buzContract);
         return resolve(buzContract);
       })
