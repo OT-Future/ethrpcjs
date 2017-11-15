@@ -5,7 +5,7 @@ var BUSINESS = function(parent) {
   this.web3 = this._parent.web3.getModule();
   this.abiTemplate = {
     ReadyERC20: require('./interfaceABI/ReadyERC20.json'),
-    ReadyERC20ADV: require('./interfaceABI/ReadyERC20ADV.json')
+    ReadyERC20ADV: require('./interfaceABI/ReadyERC20ADV.json'),
     ReadyERC21ADV: require('./interfaceABI/ReadyERC21ADV.json')
   };
 
