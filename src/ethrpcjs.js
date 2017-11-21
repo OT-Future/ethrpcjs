@@ -8,7 +8,8 @@ const ETH = require('./rpc_eth');
 const ADMIN = require('./rpc_admin');
 const RPCMODULE = require('./rpc_module');
 
-var ETHRPCJS = function(rpcprotocol, rpcaddr, rpcport) {
+var ETHRPCJS = function(isProduction, rpcprotocol, rpcaddr, rpcport) {
+  this.isProduction = this.isProduction || false;
   this.rpcprotocol = rpcprotocol || 'http';
   this.rpcaddr = rpcaddr || 'localhost';
   this.rpcport = rpcport || 8545;

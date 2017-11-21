@@ -1,3 +1,4 @@
+var os = require('os');
 
 var BUSINESS = function(parent) {
   this.businessFactory = require('./interfaceABI/Business.json');
@@ -9,18 +10,17 @@ var BUSINESS = function(parent) {
     ReadyERC21ADV: require('./interfaceABI/ReadyERC21ADV.json')
   };
 
-  this.contractInterface = new this.web3.eth.Contract(
-    this.businessFactory.interface,
-    this.businessFactory.address
-  );
+  var contractAddress = this.businessFactory.address;
+  if (this._parent.isProduction) {
+    contractAddress = this.businessFactory.addressReadyEther;
+  }
+
+  this.contractInterface = new this.web3.eth.Contract(this.businessFactory.interface, contractAddress);
 
   return this;
 };
 
-BUSINESS.prototype.getBusinessContract = function(
-  businessToken,
-  businessPosition
-) {
+BUSINESS.prototype.getBusinessContract = function(businessToken, businessPosition) {
   var _this = this;
 
   return new Promise(function(resolve, reject) {

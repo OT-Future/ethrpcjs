@@ -1,5 +1,6 @@
 {
   "address": "0xEe7b00605DE09beF70c467E4dacD02A50Db84A57",
+  "addressReadyEther" : "0xfc988Bd6AC6e47F43da5385ad3dD92df8e7D5158",
   "interface": [
     {
       "constant": true,
