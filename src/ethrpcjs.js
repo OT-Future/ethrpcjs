@@ -9,7 +9,7 @@ const ADMIN = require('./rpc_admin');
 const RPCMODULE = require('./rpc_module');
 
 var ETHRPCJS = function(isProduction, rpcprotocol, rpcaddr, rpcport) {
-  this.isProduction = this.isProduction || false;
+  this.isProduction = isProduction || false;
   this.rpcprotocol = rpcprotocol || 'http';
   this.rpcaddr = rpcaddr || 'localhost';
   this.rpcport = rpcport || 8545;
