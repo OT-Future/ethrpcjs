@@ -1,3 +1,7 @@
+var os = require('os');
+var isDebug = false;
+var DEBUG = isDebug ? DEBUG : function() {};
+var ERROR = console.error;
 
 var BUSINESS = function(parent) {
   this.businessFactory = require('./interfaceABI/Business.json');
@@ -9,18 +13,17 @@ var BUSINESS = function(parent) {
     ReadyERC21ADV: require('./interfaceABI/ReadyERC21ADV.json')
   };
 
-  this.contractInterface = new this.web3.eth.Contract(
-    this.businessFactory.interface,
-    this.businessFactory.address
-  );
+  var contractAddress = this.businessFactory.address;
+  if (this._parent.isProduction) {
+    contractAddress = this.businessFactory.addressReadyEther;
+  }
+  DEBUG('contractAddress', contractAddress);
+  this.contractInterface = new this.web3.eth.Contract(this.businessFactory.interface, contractAddress);
 
   return this;
 };
 
-BUSINESS.prototype.getBusinessContract = function(
-  businessToken,
-  businessPosition
-) {
+BUSINESS.prototype.getBusinessContract = function(businessToken, businessPosition) {
   var _this = this;
 
   return new Promise(function(resolve, reject) {
@@ -29,20 +32,21 @@ BUSINESS.prototype.getBusinessContract = function(
       address: '',
       abiInterface: ''
     };
+    DEBUG('BUSINESS.prototype.getBusinessContract params', businessToken, businessPosition);
     _this.contractInterface.methods
       .OwnedBusiness(businessToken, businessPosition)
       .call()
       .then(function(data) {
-        console.log('BUSINESS.prototype.getBusinessContract data', data);
-        var BuzAddress = data['businessContractAddress'] || '';
-        var abiType = data['interfaceABI'].replace('.json', '') || 'ReadyERC21ADV';
+        DEBUG('BUSINESS.prototype.getBusinessContract data', data);
+        var BuzAddress = data.businessContractAddress || '';
+        var abiType = data.interfaceABI.replace('.json', '') || 'ReadyERC21ADV';
         var abi = _this.abiTemplate[abiType];
         var buzContract = new _this.web3.eth.Contract(abi, BuzAddress);
-        //console.log('BUSINESS.prototype.getBusinessContract data', buzContract);
+        DEBUG('BUSINESS.prototype.getBusinessContract data', buzContract);
         return resolve(buzContract);
       })
       .catch(function(error) {
-        //console.log('BUSINESS.prototype.getBusinessContract error', error);
+        ERROR('BUSINESS.prototype.getBusinessContract error', error);
         return reject(error);
       });
   });
