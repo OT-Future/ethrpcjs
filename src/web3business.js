@@ -1,9 +1,9 @@
 var os = require('os');
 var isDebug = false;
-var DEBUG = isDebug ? DEBUG : function() {};
+var DEBUG = isDebug ? console.log : function () { }
 var ERROR = console.error;
 
-var BUSINESS = function(parent) {
+var BUSINESS = function (parent) {
   this.businessFactory = require('./interfaceABI/Business.json');
   this._parent = parent;
   this.web3 = this._parent.web3.getModule();
@@ -23,10 +23,10 @@ var BUSINESS = function(parent) {
   return this;
 };
 
-BUSINESS.prototype.getBusinessContract = function(businessToken, businessPosition) {
+BUSINESS.prototype.getBusinessContract = function (businessToken, businessPosition) {
   var _this = this;
 
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     if (!_this.web3) return reject('web3 not set');
     var businessContract = {
       address: '',
@@ -36,7 +36,7 @@ BUSINESS.prototype.getBusinessContract = function(businessToken, businessPositio
     _this.contractInterface.methods
       .OwnedBusiness(businessToken, businessPosition)
       .call()
-      .then(function(data) {
+      .then(function (data) {
         DEBUG('BUSINESS.prototype.getBusinessContract data', data);
         var BuzAddress = data.businessContractAddress || '';
         var abiType = data.interfaceABI.replace('.json', '') || 'ReadyERC21ADV';
@@ -45,7 +45,7 @@ BUSINESS.prototype.getBusinessContract = function(businessToken, businessPositio
         DEBUG('BUSINESS.prototype.getBusinessContract data', buzContract);
         return resolve(buzContract);
       })
-      .catch(function(error) {
+      .catch(function (error) {
         ERROR('BUSINESS.prototype.getBusinessContract error', error);
         return reject(error);
       });

@@ -1,5 +1,5 @@
 const http = require('http');
-const querystring = require('querystring');
+//const querystring = require('querystring');
 
 var RPCREQUEST = function (parent, requestid) {
   this.parent = parent;
@@ -13,13 +13,13 @@ module.exports = RPCREQUEST;
 
 RPCREQUEST.prototype.request = function (method, params, param_options) {
   if (!params || typeof params !== 'object') params = [params];
-
   var data = {
     jsonrpc: "2.0",
     id: this.requestid++,
     method: method,
     params: params
   }
+  
   console.log('ETHRPCJS.request.data', data);
   var postData = JSON.stringify(data);
 
@@ -33,8 +33,11 @@ RPCREQUEST.prototype.request = function (method, params, param_options) {
       'Content-Length': Buffer.byteLength(postData)
     }
   }
+  return httpRequest(options, postData)
+}
 
-  return new Promise(function (resolve, reject) {    
+function httpRequest(options, postData) {
+  return new Promise(function (resolve, reject) {
     var req = http.request(options, (res) => {
       var res_chunk = '';
       res.setEncoding('utf8');
